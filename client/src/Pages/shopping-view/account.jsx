@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import accImg from '../../assets/account.jpg'
-import Address from '@/components/shopping-view/address'
+import Address from '@/components/shopping-view/Address'
 import ShoppingOrders from '@/components/shopping-view/orders'
 
 function ShoppingAccount() {
