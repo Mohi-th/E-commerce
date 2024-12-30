@@ -5,7 +5,7 @@ import { addressFormControls } from "@/config";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewAddress, deleteAddress, editAddress, fetchAllAddresses } from "@/store/shop/address-slice";
 import { useToast } from "@/hooks/use-toast";
-import AddressCard from "./Address-card";
+import AddressCard from "./address-card";
 
 
 const initialAddressFormData = {
