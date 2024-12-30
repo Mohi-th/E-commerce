@@ -5,7 +5,7 @@ const User = require('../../models/User')
 
 
 const handleUserRegister = async (req, res) => {
-    
+
     const { userName, email, password } = req.body;
     try {
 
@@ -48,18 +48,31 @@ const handleUserLogin = async (req, res) => {
         }
 
         const token = jwt.sign({
-            id: checkUser._id, role: checkUser.role, email: checkUser.email,userName:checkUser.userName
+            id: checkUser._id, role: checkUser.role, email: checkUser.email, userName: checkUser.userName
         }, 'CLIENT_SECRET_KEY', { expiresIn: '60m' })
 
-        res.cookie('token', token, { httpOnly: true ,secure:true}).json({
+        // res.cookie('token', token, { httpOnly: true ,secure:true}).json({
+        //     success: true,
+        //     message: "Logged in successfully",
+        //     user: {
+        //         email: checkUser.email,
+        //         role: checkUser.role,
+        //         id: checkUser._id,
+        //         userName:checkUser.userName
+        //     }
+        // })
+
+        res.status(200).json({
             success: true,
-            message: "Logged in successfully",
+            message: "logged in successfull",
+            token,
             user: {
                 email: checkUser.email,
                 role: checkUser.role,
                 id: checkUser._id,
-                userName:checkUser.userName
+                userName: checkUser.userName
             }
+
         })
 
     } catch (e) {
@@ -77,7 +90,8 @@ const HandleUserlogout = (req, res) => {
 
 const authMiddleware = async (req, res, next) => {
 
-    const token = req.cookies.token;
+    const authHeader = req.headers['authorization'];
+    const token=authHeader&&authHeader.split(' ')[1]
     if (!token) return res.status(401).json({
         success: false,
         message: "Unathorized user!"
@@ -94,5 +108,24 @@ const authMiddleware = async (req, res, next) => {
         })
     }
 }
+// const authMiddleware = async (req, res, next) => {
+
+//     const token = req.cookies.token;
+//     if (!token) return res.status(401).json({
+//         success: false,
+//         message: "Unathorized user!"
+//     })
+
+//     try {
+//         const decoded = jwt.verify(token, 'CLIENT_SECRET_KEY');
+//         req.user = decoded;
+//         next();
+//     } catch (e) {
+//         res.status(401).json({
+//             success: false,
+//             message: "Unauthorized user!"
+//         })
+//     }
+// }
 
 module.exports = { handleUserRegister, handleUserLogin, HandleUserlogout, authMiddleware }

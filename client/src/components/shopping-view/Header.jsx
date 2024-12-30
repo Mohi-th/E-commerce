@@ -15,7 +15,7 @@ import {
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Fragment, useEffect, useState } from "react"
-import { logOutuser } from "@/store/auth-slice"
+import { logOutuser, resetTokenAndCredentials } from "@/store/auth-slice"
 import { fetchCartItems } from "@/store/shop/cart-slice"
 import { Label } from "../ui/label"
 import UserCartWrapper from "./Cart-wrapper"
@@ -70,7 +70,10 @@ function HeaderRightContent() {
   }, [dispatch,user?.id])
 
   function handleLogOut() {
-    dispatch(logOutuser())
+    // dispatch(logOutuser())
+    dispatch(resetTokenAndCredentials())
+    sessionStorage.clear()
+    navigate("/auth/login")
   }
 
 
