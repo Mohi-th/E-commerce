@@ -10,7 +10,7 @@ export const addNewProducts = createAsyncThunk(
     '/products/addnewproducts',
     async (formdata) => {
         console.log(formdata)
-        const response = await axios.post(`http://${import.meta.env.VITE_API_URL}/api/admin/products/add`, formdata, {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/admin/products/add`, formdata, {
             headers: {
                 "Content-Type": 'application/json',
             },
@@ -21,14 +21,14 @@ export const addNewProducts = createAsyncThunk(
 export const fetchAllproducts = createAsyncThunk(
     '/products/fetchAllproducts',
     async () => {
-        const response = await axios.get(`http://${import.meta.env.VITE_API_URL}/api/admin/products/get`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/products/get`);
         return response?.data
     }
 )
 export const editProduct = createAsyncThunk(
     '/products/editproduct',
     async ({id,formData}) => {
-        const response = await axios.put(`http://${import.meta.env.VITE_API_URL}/api/admin/products/edit/${id}`, formData, {
+        const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/admin/products/edit/${id}`, formData, {
             headers: {
                 "Content-Type": 'application/json',
             },
@@ -39,7 +39,7 @@ export const editProduct = createAsyncThunk(
 export const deleteProduct = createAsyncThunk(
     '/products/deleteproduct',
     async (id) => {
-        const response = await axios.put(`http://${import.meta.env.VITE_API_URL}/api/admin/products/delete/${id}`,{
+        const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/admin/products/delete/${id}`,{
             headers:{
                 "Content-Type": 'application/json',
             }
