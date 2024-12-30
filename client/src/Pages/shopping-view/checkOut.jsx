@@ -1,4 +1,4 @@
-import Address from '@/components/shopping-view/address'
+import Address from '@/components/shopping-view/Address'
 import img from '../../assets/account.jpg'
 import { useDispatch, useSelector } from 'react-redux'
 import UserCartItemContent from '@/components/shopping-view/User-cart-items-content'
